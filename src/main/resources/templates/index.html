@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Popular Movies</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px;
+        }
+        .movie {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        .movie img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+<h1>Popular Movies</h1>
+<a href="/favorites">⭐ View Favorites</a>
+<div class="movie-grid">
+    <div class="movie" th:each="movie : ${movies}">
+        <img th:src="'https://image.tmdb.org/t/p/w200' + ${movie.posterPath}" th:alt="${movie.title}" />
+        <h3>
+            <a th:href="@{'/movie/' + ${movie.id}}" th:text="${movie.title}">Movie Title</a>
+        </h3>
+
+        <p th:text="'Rating: ' + ${movie.rating}"></p>
+        <p th:text="${movie.releaseDate}"></p>
+    </div>
+</div>
+</body>
+</html>

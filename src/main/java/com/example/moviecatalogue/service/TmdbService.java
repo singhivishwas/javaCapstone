@@ -1,9 +1,11 @@
 package com.example.moviecatalogue.service;
 
+import com.example.moviecatalogue.model.TmdbResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import com.example.moviecatalogue.model.TmdbMovie;
 
 @Service
 public class TmdbService {
@@ -16,10 +18,19 @@ public class TmdbService {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    public String getPopularMovies() {
+    public TmdbResponse getPopularMovies() {
         String uri = UriComponentsBuilder.fromHttpUrl(baseUrl + "/movie/popular")
                 .queryParam("api_key", apiKey)
                 .toUriString();
-        return restTemplate.getForObject(uri, String.class);
+
+        return restTemplate.getForObject(uri, TmdbResponse.class);
+    }
+
+    public TmdbMovie getMovieById(int movieId) {
+        String uri = UriComponentsBuilder.fromHttpUrl(baseUrl + "/movie/" + movieId)
+                .queryParam("api_key", apiKey)
+                .toUriString();
+
+        return restTemplate.getForObject(uri, TmdbMovie.class);
     }
 }
