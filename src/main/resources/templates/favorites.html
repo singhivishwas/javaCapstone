@@ -20,9 +20,19 @@
             height: auto;
         }
     </style>
+    <link rel="stylesheet" th:href="@{/style.css}" />
+
 </head>
 <body>
-<h1>Your Favorite Movies</h1>
+<header>
+    <h1>🎬 Movie Catalogue</h1>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/favorites">Favorites</a>
+    </nav>
+</header>
+
+<h1 style="text-align:center">Your Favorite Movies</h1>
 <div class="movie-grid">
     <div class="movie" th:each="movie : ${favorites}">
         <img th:src="'https://image.tmdb.org/t/p/w200' + ${movie.posterPath}" th:alt="${movie.title}" />

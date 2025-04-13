@@ -33,4 +33,14 @@ public class TmdbService {
 
         return restTemplate.getForObject(uri, TmdbMovie.class);
     }
+
+    public TmdbResponse searchMovies(String query) {
+        String uri = UriComponentsBuilder.fromHttpUrl(baseUrl + "/search/movie")
+                .queryParam("api_key", apiKey)
+                .queryParam("query", query)
+                .toUriString();
+
+        return restTemplate.getForObject(uri, TmdbResponse.class);
+    }
+
 }

@@ -3,8 +3,18 @@
 <head>
     <title th:text="${movie.title}">Movie Details</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/style.css}" />
+
 </head>
 <body>
+<header>
+    <h1>🎬 Movie Catalogue</h1>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/favorites">Favorites</a>
+    </nav>
+</header>
+
 <h1 th:text="${movie.title}">Movie Title</h1>
 <img th:src="'https://image.tmdb.org/t/p/w300' + ${movie.posterPath}" th:alt="${movie.title}" />
 <p><strong>Release Date:</strong> <span th:text="${movie.releaseDate}"></span></p>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.example.moviecatalogue.model.FavoriteMovie;
 import com.example.moviecatalogue.repository.FavoriteRepository;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -45,6 +46,17 @@ public class MovieController {
         model.addAttribute("favorites", favoriteRepository.findAll());
         return "favorites";
     }
+
+
+
+    @GetMapping("/search")
+    public String searchMovies(@RequestParam String query, Model model) {
+        List<TmdbMovie> results = tmdbService.searchMovies(query).getResults();
+        model.addAttribute("movies", results);
+        model.addAttribute("searchQuery", query);
+        return "index";
+    }
+
 
     @PostMapping("/favorites/add/{id}")
     public String addToFavorites(@PathVariable int id) {
